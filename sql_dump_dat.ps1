@@ -1,8 +1,23 @@
-
-<# SQL Server 2016 table => csv file
- Export table data from SQL Server 2016 to csv file by bcp 
- Powershell script
+<#
+# Used to:   SQL Server 2016 table => csv file
+            Export table data from SQL Server 2016 to csv file by bcp
+#------------------------------------------------------------------------------------------------
+# Developer:    xu.chen
+# Blog:         http://chenxu.info
+# Email:        linuxjosery@gmail.com
+# Created on:   2017/06/10
+# Location:
+# Execution:    sql_dump_dat.ps1
+# Description:  将MSSQL中的表导出为CSV文件
+# Revision History:
+#
+# Name             Date            Description
+#------------------------------------------------------------------------------------------------
+# xu.chen        2017/06/10      Initial Version
+#------------------------------------------------------------------------------------------------
 #>
+
+
 
 $arg = '-t, -r0x0A -c -T -k -C65001'
 $dir = 'D:\table'
@@ -15,7 +30,7 @@ $num0 = $db0_tb.Length
 for ($i=0; $i -lt "$num0"; $i++)
 {
     $tb0 = $db0_tb[$i]
-    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db0.dbo.$tb0" queryout "$dir\$tb0.dat" -o "$log\$tb0.log" "-t," -r0x0A -c -T -k -C65001 
+    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db0.dbo.$tb0" queryout "$dir\$tb0.dat" -o "$log\$tb0.log" "-t," -r0x0A -c -T -k -C65001
 }
 
 
@@ -26,7 +41,7 @@ $num0 = $db1_tb.Length
 for ($i=0; $i -lt "$num0"; $i++)
 {
     $tb1 = $db1_tb[$i]
-    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db1.dbo.$tb1" queryout "$dir\$tb1.dat" -o "$log\$tb1.log" "-t," -r0x0A -c -T -k -C65001   
+    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db1.dbo.$tb1" queryout "$dir\$tb1.dat" -o "$log\$tb1.log" "-t," -r0x0A -c -T -k -C65001
 }
 
 
@@ -40,14 +55,14 @@ $num0 = $db2_tb0.Length
 for ($i=0; $i -lt "$num0"; $i++)
 {
     $tb0 = $db2_tb0[$i]
-    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,'',fildate,gdcode,dealtime FROM $db2.dbo.$tb0" queryout "$dir\$tb0.dat" -o "$log\$tb0.log" "-t," -r0x0A -c -T -k -C65001 
+    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,'',fildate,gdcode,dealtime FROM $db2.dbo.$tb0" queryout "$dir\$tb0.dat" -o "$log\$tb0.log" "-t," -r0x0A -c -T -k -C65001
 }
 
 $num1 = $db2_tb1.Length
 for ($i=0; $i -lt "$num1"; $i++)
 {
     $tb1 = $db2_tb1[$i]
-    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db2.dbo.$tb1" queryout "$dir\$tb1.dat" -o "$log\$tb1.log" "-t," -r0x0A -c -T -k -C65001 
+    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db2.dbo.$tb1" queryout "$dir\$tb1.dat" -o "$log\$tb1.log" "-t," -r0x0A -c -T -k -C65001
 }
 
 
@@ -60,14 +75,14 @@ $num0 = $db3_tb0.Length
 for ($i=0; $i -lt "$num0"; $i++)
 {
     $tb0 = $db3_tb0[$i]
-    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,'' FROM $db3.dbo.$tb0" queryout "$dir\$tb0.dat" -o "$log\$tb0.log" "-t," -r0x0A -c -T -k -C65001  
+    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,'' FROM $db3.dbo.$tb0" queryout "$dir\$tb0.dat" -o "$log\$tb0.log" "-t," -r0x0A -c -T -k -C65001
 }
 
 $num1 = $db3_tb1.Length
 for ($i=0; $i -lt "$num1"; $i++)
 {
     $tb1 = $db3_tb1[$i]
-    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db3.dbo.$tb1" queryout "$dir\$tb1.dat" -o "$log\$tb1.log" "-t," -r0x0A -c -T -k -C65001 
+    bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM $db3.dbo.$tb1" queryout "$dir\$tb1.dat" -o "$log\$tb1.log" "-t," -r0x0A -c -T -k -C65001
 }
 
 
@@ -88,13 +103,13 @@ sqlcmd -Q "SELECT gid,code,name,code2,sort,sname FROM buy20170525.dbo.goods" -o 
 
 
 
-white 
+white
 bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM buy2016.dbo.buy22016_03" queryout "D:\tables\buy22016_03.csv" -t',' -c -T -k -w
 
 black
 bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM buy2016_2.dbo.buy22016_10" queryout "D:\tables\buy2016_2 buy22016_10.csv" -t',' -c -T -k -w
 
-white 
+white
 bcp "SELECT FLOWNO,POSNO,ITEMNO,GID,QTY,PRICE,REALAMT,LSTUPDTIME,fildate,gdcode,dealtime FROM buy2017.dbo.buy22016_10" queryout "D:\tables\buy2016_2 buy22016_10.csv" -t',' -c -T -k -w -o ""
 
 #>
